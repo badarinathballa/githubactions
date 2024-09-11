@@ -1,0 +1,30 @@
+name: Example Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Load environment variables from .env file
+        run: |
+          export $(grep -v '^#' .env | xargs)
+        shell: bash
+
+      - name: List environment variables
+        run: |
+          echo "Listing environment variables:"
+          env
+
+      - name: Print specific environment variables
+        run: |
+          echo "ENV_VAR1 is $ENV_VAR1"
+          echo "ENV_VAR2 is $ENV_VAR2"
+          echo "registry is $registry"
+
