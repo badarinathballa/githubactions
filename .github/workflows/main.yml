@@ -14,9 +14,18 @@ jobs:
 
       - name: Load environment variables from .env file
         run: |
-          export $(grep -v '^#' .env | xargs)
-        shell: bash
+          set -o allexport
+          source .env
+          set -o allexport
+          # Export each variable to $GITHUB_ENV for the entire job
+          while read -r line || [[ -n "$line" ]]; do
+            if [[ ! "$line" =~ ^# && "$line" =~ = ]]; then
+              echo "$line" >> $GITHUB_ENV
+            fi
+          done < .env
+        shell: bash 
 
+        
       - name: List environment variables
         run: |
           echo "Listing environment variables:"
