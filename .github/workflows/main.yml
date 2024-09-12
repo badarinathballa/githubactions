@@ -36,6 +36,8 @@ jobs:
           echo "ENV_VAR1 is $ENV_VAR1"
           echo "ENV_VAR2 is $ENV_VAR2"
           echo "registry is $registry"
-          echo image_tag=${{"ENV_VAR1.ENV_VAR2.registry"}}
+          echo image_tag="${{ env.Build_NUMBER}}.${{ env.ENV_VAR1}}"
           echo "image tag is $image_tag"
+          echo image_num="${{ env.Build_NUMBER}}.${{ env.ENV_VAR2}}-${{ env.registry }}"
+          echo "printing image_num is $image_num"
 
