@@ -25,7 +25,7 @@ jobs:
           done < .env
         shell: bash 
 
-        
+
       - name: List environment variables
         run: |
           echo "Listing environment variables:"
@@ -36,4 +36,6 @@ jobs:
           echo "ENV_VAR1 is $ENV_VAR1"
           echo "ENV_VAR2 is $ENV_VAR2"
           echo "registry is $registry"
+          echo image_tag=${{"ENV_VAR1.ENV_VAR2.registry"}}
+          echo "image tag is $image_tag"
 
